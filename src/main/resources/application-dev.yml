@@ -1,0 +1,33 @@
+server:
+  port: 9091
+  context-path: /sdwlVideo
+spring:
+    http.multipart.maxFileSize: 10MB
+    datasource:
+        name: test
+        url: jdbc:mysql://39.106.121.250:3306/sdwlVideo?useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: admin@2018
+        # 使用druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+    type-aliases-package: com.sdwl.video.model
+    mapper-locations: classpath:mapper/*.xml
+mapper:
+    mappers: com.sdwl.video.mapper.CommonMapper
+    not-empty: false
+    identity: MYSQL
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+image:
+    filePath: /data/www/sdwlvidoe/upload/
+    fileHeader: FFD8FF,89504E47,47494638,49492A00,424D,504B0304,D0CF11E0,D0CF11E0,00000000,61706920,25504446
+    fileType: .jpg,.gif,.png,.bmp,.jpeg,.zip,.xlsx,.doc,.xls,.docx,.txt,.pdf
+    url: 39.108.5.62:8080
+logging:
+  file: D:/log/test.log
+  level: DEBUG
