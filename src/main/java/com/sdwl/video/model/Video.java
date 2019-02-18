@@ -1,14 +1,12 @@
 package com.sdwl.video.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Creaed by fj on 2019/2/18
  */
+@Table(name = "sd_video")
 public class Video {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
