@@ -29,5 +29,5 @@ image:
     fileType: .jpg,.gif,.png,.bmp,.jpeg,.zip,.xlsx,.doc,.xls,.docx,.txt,.pdf
     url: www.fangart.cn
 logging:
-  file: D:/log/test.log
+  file: /log/sdwlVideo.log
   level: DEBUG
