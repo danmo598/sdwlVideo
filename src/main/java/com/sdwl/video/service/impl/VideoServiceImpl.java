@@ -51,13 +51,14 @@ public class VideoServiceImpl implements IVideoService {
             targetFile.mkdirs();
         }
         //保存
+        String path= imageUrl + filePath + fileName;
         try {
-            fileUpload.transferTo(new File(filePath+File.separator+fileName));
+            fileUpload.transferTo(new File(path));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        String up_sounce_path = "";
+       /* String up_sounce_path = "";
         if (!fileName.split("\\.")[1].toLowerCase().equals("mp4")) {
             System.out.println("转换开始");
             FFMpegUtil ffm = new FFMpegUtil("/usr/local/ffmpeg-4.1/ffmpeg", targetFile.getPath());
@@ -93,9 +94,9 @@ public class VideoServiceImpl implements IVideoService {
         System.out.println(fileName.split("\\.")[0] + "." + "mp4");
         File tofile = new File(base_topath+fileName.split("\\.")[0] + "." + "mp4");
         tofile.delete();
-        String video_url = "http://"+imageUrl+"/to/"+fileName.split("\\.")[0] +date+"_commp.mp4";
-        System.out.println(video_url);
-        video.setVideoUrl(video_url);
+        String video_url = "http://"+imageUrl+"/to/"+fileName.split("\\.")[0] +date+"_commp.mp4";*/
+       /* System.out.println(video_url);
+        video.setVideoUrl(video_url);*/
         videoMapper.insertSelective(video);
 
     }
