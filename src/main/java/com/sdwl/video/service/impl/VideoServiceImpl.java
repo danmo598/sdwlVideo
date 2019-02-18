@@ -73,7 +73,7 @@ public class VideoServiceImpl implements IVideoService {
         System.out.println("压缩开始");
         //压缩MP4文件
         String commp_path = base_topath + fileName.split("\\.")[0] +date+"_commp.mp4";
-        FFMpegUtil ffm_commp = new FFMpegUtil("/usr/local/bin/ffmpeg", up_sounce_path);
+        FFMpegUtil ffm_commp = new FFMpegUtil("/usr/local/ffmpeg-4.1", up_sounce_path);
         boolean flag = ffm_commp.videoCompress(commp_path);
         if(!flag){
             throw new BaseException(StatEnum.SERVER_ERROR);
