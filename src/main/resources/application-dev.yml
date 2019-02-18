@@ -24,7 +24,7 @@ pagehelper:
     supportMethodsArguments: true
     params: count=countSql
 image:
-    filePath: /data/www/sdwlvidoe/upload/
+    filePath: d:/data/www/sdwlvidoe/upload/
     fileHeader: FFD8FF,89504E47,47494638,49492A00,424D,504B0304,D0CF11E0,D0CF11E0,00000000,61706920,25504446
     fileType: .jpg,.gif,.png,.bmp,.jpeg,.zip,.xlsx,.doc,.xls,.docx,.txt,.pdf
     url: 39.108.5.62:8080
