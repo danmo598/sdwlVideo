@@ -1,8 +1,8 @@
 package com.sdwl.video;
-
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -12,9 +12,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * Creaed by fj on 2018/10/29
+ * Creaed by fj on 2019/02/18
  */
-
 /**
  * Swagger2配置类
  * 在与spring boot集成时，放在与Application.java同级的目录下。
@@ -38,7 +37,7 @@ public class Swagger2 {
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
-                 .apis(RequestHandlerSelectors.basePackage("com.highway.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.sdwl.video.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

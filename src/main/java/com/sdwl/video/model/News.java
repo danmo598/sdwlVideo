@@ -2,7 +2,7 @@ package com.sdwl.video.model;
 
 import javax.persistence.*;
 import java.util.Date;
-
+@Table(name = "sd_news")
 public class News {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

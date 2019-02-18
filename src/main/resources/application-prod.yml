@@ -1,5 +1,5 @@
 server:
-  port: 9090
+  port: 9092
   context-path: /sdwlVideo
 spring:
     http.multipart.maxFileSize: 10MB
