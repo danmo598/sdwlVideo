@@ -27,7 +27,7 @@ public class VideoServiceImpl implements IVideoService {
     @Autowired
     VideoMapper videoMapper;
 
-    @Value("${image.imageUrl}")
+    @Value("${image.url}")
     private String imageUrl;
 
     @Value("${image.filePath}")
