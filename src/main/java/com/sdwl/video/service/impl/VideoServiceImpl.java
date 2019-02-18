@@ -79,7 +79,6 @@ public class VideoServiceImpl implements IVideoService {
         if(!flag){
             throw new BaseException(StatEnum.SERVER_ERROR);
         }
-        System.out.println("截取图片");
         //截取一帧图片
        /* String grip_path = commp_path.split("\\.")[0] +".jpg";
         FFMpegUtil ffm_grip = new FFMpegUtil("/usr/local/ffmpeg-4.1/ffmpeg", commp_path);
@@ -90,12 +89,12 @@ public class VideoServiceImpl implements IVideoService {
         File[] files=file.listFiles();//获取文件列表
         for(int i=0;i<files.length;i++)
         {
-            files[i].delete();
+           // files[i].delete();
         }
 
         System.out.println(fileName.split("\\.")[0] + "." + "mp4");
         File tofile = new File(base_topath+fileName.split("\\.")[0] + "." + "mp4");
-        tofile.delete();
+        //tofile.delete();
         String video_url = "http://"+imageUrl+"/to/"+fileName.split("\\.")[0] +date+"_commp.mp4";
         System.out.println(video_url);
         video.setVideoUrl(video_url);
