@@ -61,7 +61,7 @@ public class VideoServiceImpl implements IVideoService {
         String up_sounce_path = "";
         if (!fileName.split("\\.")[1].toLowerCase().equals("mp4")) {
             System.out.println("转换开始");
-            FFMpegUtil ffm = new FFMpegUtil("/usr/local/ffmpeg-4.1", targetFile.getPath());
+            FFMpegUtil ffm = new FFMpegUtil("/usr/local/ffmpeg-4.1/ffmpeg", targetFile.getPath());
             String newfilename = fileName.split("\\.")[0] + "." + "mp4";
             System.out.println(newfilename);
             up_sounce_path = base_topath + newfilename;
@@ -73,7 +73,7 @@ public class VideoServiceImpl implements IVideoService {
         System.out.println("压缩开始");
         //压缩MP4文件
         String commp_path = base_topath + fileName.split("\\.")[0] +date+"_commp.mp4";
-        FFMpegUtil ffm_commp = new FFMpegUtil("/usr/local/ffmpeg-4.1", up_sounce_path);
+        FFMpegUtil ffm_commp = new FFMpegUtil("/usr/local/ffmpeg-4.1/ffmpeg", up_sounce_path);
         boolean flag = ffm_commp.videoCompress(commp_path);
         if(!flag){
             throw new BaseException(StatEnum.SERVER_ERROR);
@@ -81,7 +81,7 @@ public class VideoServiceImpl implements IVideoService {
         System.out.println("截取图片");
         //截取一帧图片
         String grip_path = commp_path.split("\\.")[0] +".jpg";
-        FFMpegUtil ffm_grip = new FFMpegUtil("/usr/local/ffmpeg-4.1", commp_path);
+        FFMpegUtil ffm_grip = new FFMpegUtil("/usr/local/ffmpeg-4.1/ffmpeg", commp_path);
         ffm_grip.videoGripframe(grip_path);
 
         File file = new File(filePath);
