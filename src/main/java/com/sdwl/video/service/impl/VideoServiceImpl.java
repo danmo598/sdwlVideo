@@ -46,14 +46,13 @@ public class VideoServiceImpl implements IVideoService {
         }else if(!fileName.substring(fileName.lastIndexOf(".")+1).equalsIgnoreCase("flv")&&!fileName.substring(fileName.lastIndexOf(".")+1).equalsIgnoreCase("mp4")&&!fileName.substring(fileName.lastIndexOf(".")+1).equalsIgnoreCase("mov")){
             throw new BaseException(StatEnum.VIDEO_TYPE_ERROR);
         }
-
         File targetFile = new File(filePath, fileName);
         if (!targetFile.exists()) {
             targetFile.mkdirs();
         }
         //保存
         try {
-            fileUpload.transferTo(targetFile);
+            fileUpload.transferTo(new File(filePath+File.separator+fileName));
         } catch (Exception e) {
             e.printStackTrace();
         }
