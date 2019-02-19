@@ -89,7 +89,7 @@ public class VideoServiceImpl implements IVideoService {
         File[] files=file.listFiles();//获取文件列表
         for(int i=0;i<files.length;i++)
         {
-           // files[i].delete();
+            files[i].delete();
         }
 
         System.out.println(fileName.split("\\.")[0] + "." + "mp4");
