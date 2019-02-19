@@ -62,6 +62,7 @@ public class VideoServiceImpl implements IVideoService {
         String up_sounce_path = "";
         if (!fileName.split("\\.")[1].toLowerCase().equals("mp4")) {
             System.out.println("转换开始");
+            //D:\ffmpeg\bin\ffmpeg
             FFMpegUtil ffm = new FFMpegUtil("/usr/local/ffmpeg-4.1/ffmpeg", targetFile.getPath());
             String newfilename = fileName.split("\\.")[0] + "." + "mp4";
             System.out.println(newfilename);

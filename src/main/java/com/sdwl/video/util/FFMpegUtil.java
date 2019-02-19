@@ -16,7 +16,7 @@ public class FFMpegUtil implements IStringGetter {
 
     public static void main(String[] args) {
 
-        FFMpegUtil ffm = new FFMpegUtil("http://192.168.0.88:83/ffmpeg","E:\\IMG_0630.MOV");
+        FFMpegUtil ffm = new FFMpegUtil("D:\\ffmpeg\\bin\\ffmpeg","E:\\a2.mp4");
         ///usr/local/bin/ffmpeg
         ffm.videoTransfer("E:\\IMG_0630.mp4");
     }
@@ -43,11 +43,7 @@ public class FFMpegUtil implements IStringGetter {
     }
 
     /**
-     * ????
-     * @Title: videoCompress
-     * @Description: TODO(???????????????)
-     * @param fileSavePath ????.void ????
-     * ???ffmpeg -i img_0663.mp4 -vf scale=iw*0.3:ih*0.3 output_img_0663.mp4
+     * ffmpeg -i img_0663.mp4 -vf scale=iw*0.3:ih*0.3 output_img_0663.mp4
      * @throws
      */
     public boolean videoCompress(String fileSavePath){
@@ -56,7 +52,7 @@ public class FFMpegUtil implements IStringGetter {
         cmd.add("-i");
         cmd.add(originFileUri);
         cmd.add("-vf");
-        cmd.add("scale=iw*0.8:ih*0.8");
+        cmd.add("scale=iw*0.5:ih*0.5");
         cmd.add( fileSavePath );
         boolean flag =   CmdExecuter.exec(cmd, null);
         return  flag;
