@@ -95,7 +95,7 @@ public class VideoServiceImpl implements IVideoService {
         System.out.println(fileName.split("\\.")[0] + "." + "mp4");
         File tofile = new File(base_topath+fileName.split("\\.")[0] + "." + "mp4");
         //tofile.delete();
-        String video_url = "http://"+imageUrl+"/to/"+fileName.split("\\.")[0] +date+"_commp.mp4";
+        String video_url = "http://"+imageUrl+"/sdwlvideo/upload/to/"+fileName.split("\\.")[0] +date+"_commp.mp4";
         System.out.println(video_url);
         video.setVideoUrl(video_url);
         videoMapper.insertSelective(video);
