@@ -56,7 +56,7 @@ public class FFMpegUtil implements IStringGetter {
         cmd.add("-i");
         cmd.add(originFileUri);
         cmd.add("-vf");
-        cmd.add("scale=iw*0.5:ih*0.5");
+        cmd.add("scale=iw*0.8:ih*0.8");
         cmd.add( fileSavePath );
         boolean flag =   CmdExecuter.exec(cmd, null);
         return  flag;
