@@ -52,7 +52,7 @@ public class VideoServiceImpl implements IVideoService {
         }
         //保存
 
-        String path=  filePath + date + fileName;
+        String path=  filePath + fileName + date;
         try {
             fileUpload.transferTo(new File(path));
         } catch (Exception e) {
