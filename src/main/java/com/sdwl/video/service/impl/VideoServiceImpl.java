@@ -52,7 +52,7 @@ public class VideoServiceImpl implements IVideoService {
         }
         //保存
 
-        String path=  filePath + fileName + date;
+        String path=  filePath + date + fileName;
         try {
             fileUpload.transferTo(new File(path));
         } catch (Exception e) {
@@ -97,7 +97,7 @@ public class VideoServiceImpl implements IVideoService {
         File tofile = new File(base_topath+fileName.split("\\.")[0] + "." + "mp4");*/
         //tofile.delete();
        // String video_url = "http://"+imageUrl+"/sdwlvideo/upload/to/"+fileName.split("\\.")[0] +date+"_commp.mp4";
-         String video_url = "http://"+imageUrl+"/sdwlvideo/upload/"+fileName.split("\\.")[0] +date+"_commp.mp4";
+         String video_url = "http://"+imageUrl+"/sdwlvideo/upload/"+date+ fileName.split("\\.")[0] +"_commp.mp4";
         System.out.println(video_url);
         video.setVideoUrl(video_url);
         videoMapper.insertSelective(video);
