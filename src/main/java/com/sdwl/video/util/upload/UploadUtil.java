@@ -133,7 +133,7 @@ public class UploadUtil {
      */
     public String getUrlPath(String fileName, HttpServletRequest request) {
         StringBuilder sb = new StringBuilder();
-        sb.append(request.getScheme()).append("://").append(url).append("/sdwlvideo/upload/to/").append(fileName);
+        sb.append(request.getScheme()).append("://").append(url).append("/sdwlvideo/upload/").append(fileName);
         return sb.toString();
     }
 
