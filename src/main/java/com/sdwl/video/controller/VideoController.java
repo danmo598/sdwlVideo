@@ -27,7 +27,7 @@ public class VideoController {
     @PostMapping(value = "uploadVideo")
     @ApiOperation(value="上传视频接口")
     public void  uploadVideo(@RequestParam MultipartFile fileName, HttpServletRequest request, HttpServletResponse response,
-                             Video video) throws BaseException {
+                             @RequestBody Video video) throws BaseException {
         videoService.uploadVideo(fileName,request,response,video);
     }
 }
