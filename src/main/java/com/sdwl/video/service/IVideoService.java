@@ -12,11 +12,13 @@ import java.util.List;
  * Creaed by fj on 2019/2/18
  */
 public interface IVideoService {
-    void uploadVideo(MultipartFile fileName, Video video) throws BaseException;
+    String uploadVideo(MultipartFile fileName) throws BaseException;
 
     List<Video> getAllVideos(Integer pageNo, Integer pageSize, String title);
 
-    Integer updateVideo(MultipartFile fileName,Video video) throws BaseException;
+    Integer updateVideo(Video video) throws BaseException;
 
     Integer deleteVideo(Integer id);
+
+    void insertVideo(Video video);
 }

@@ -14,9 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Example;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
@@ -39,14 +36,12 @@ public class VideoServiceImpl implements IVideoService {
 
 
     @Override
-    public void uploadVideo(MultipartFile fileUpload,  Video video) throws BaseException {
-        String video_url = uploadVideos(fileUpload,video);
-        video.setVideoUrl(video_url);
-        videoMapper.insertSelective(video);
+    public String uploadVideo(MultipartFile fileUpload) throws BaseException {
+        return   uploadVideos(fileUpload);
     }
 
 
-    public String uploadVideos(MultipartFile fileUpload, Video video) throws BaseException {
+    public String uploadVideos(MultipartFile fileUpload) throws BaseException {
         String date = DateUtil.formatDateTime("yyyyMMddhhmmss", new Date());
         String base_topath = filePath+"to/";
         String fileName = fileUpload.getOriginalFilename();
@@ -117,7 +112,7 @@ public class VideoServiceImpl implements IVideoService {
 
     @Override
     public List<Video> getAllVideos(Integer pageNo, Integer pageSize, String title) {
-        PageHelper.startPage(pageNo,pageSize,"date desc");
+        PageHelper.startPage(pageNo,pageSize,"publish_date desc");
         Example example = new Example(News.class);
         if(StringUtils.isNotBlank(title)){
             title = "title like '%" + title + "%' ";
@@ -129,9 +124,7 @@ public class VideoServiceImpl implements IVideoService {
     }
 
     @Override
-    public Integer updateVideo(MultipartFile fileName,Video video) throws BaseException {
-        String video_url = uploadVideos(fileName,video);
-        video.setVideoUrl(video_url);
+    public Integer updateVideo(Video video) throws BaseException {
         return videoMapper.updateByPrimaryKey(video);
     }
 
@@ -141,5 +134,10 @@ public class VideoServiceImpl implements IVideoService {
         File file = new File(video.getVideoUrl());
         file.delete();
         return videoMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void insertVideo(Video video) {
+        videoMapper.insertSelective(video);
     }
 }

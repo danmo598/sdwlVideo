@@ -29,11 +29,16 @@ public class VideoController {
 
     @PostMapping(value = "uploadVideo")
     @ApiOperation(value="上传视频接口")
-    public void  uploadVideo(@RequestParam MultipartFile fileName,
-                             @RequestBody Video video) throws BaseException {
-        videoService.uploadVideo(fileName,video);
+    public String  uploadVideo(@RequestParam MultipartFile fileName) throws BaseException {
+        return  videoService.uploadVideo(fileName);
     }
 
+
+    @PostMapping(value = "insertVideo")
+    @ApiOperation(value="插入视频")
+    public void  insertVideo(@RequestBody Video video) throws BaseException {
+          videoService.insertVideo(video);
+    }
 
     /**
      * 分页获取视频
@@ -50,13 +55,13 @@ public class VideoController {
 
     /**
      * 更新视频
-     * @param video
+     * @param id
      * @return
      */
     @PostMapping(value = "/updateVideo")
     @ApiOperation(value="(更新一条视频")
-    public Integer updateVideo(@RequestParam MultipartFile fileName,@RequestBody Video video) throws BaseException {
-        return  videoService.updateVideo(fileName,video);
+    public Integer updateVideo( @RequestBody Video video) throws BaseException {
+        return  videoService.updateVideo(video);
     }
 
     /**
