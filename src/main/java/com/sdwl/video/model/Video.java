@@ -1,5 +1,6 @@
 package com.sdwl.video.model;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.Date;
  * Creaed by fj on 2019/2/18
  */
 @Table(name = "sd_video")
+@ApiModel
 public class Video {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
