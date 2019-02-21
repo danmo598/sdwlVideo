@@ -1,5 +1,7 @@
 package com.sdwl.video.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,26 +14,34 @@ public class Video {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ApiModelProperty(value = "标题")
     private String title;
 
+    @ApiModelProperty(value = "名称")
     private String name;
 
+    @ApiModelProperty(value = "描述")
     private String description;
 
+    @ApiModelProperty(value = "图片")
     @Column(name = "img_url")
     private String imgUrl;
 
     @Column(name = "video_url")
     private String videoUrl;
 
+    @ApiModelProperty(value = "发布日期")
     @Column(name = "publish_date")
     private Date publishDate;
 
+    @ApiModelProperty(value = "发布人")
     private String publisher;
 
+    @ApiModelProperty(value = "观看次数")
     @Column(name = "watch_times")
     private Integer watchTimes;
 
+    @ApiModelProperty(value = "是否置顶 true false")
     private boolean stick;
 
     public Integer getId() {
