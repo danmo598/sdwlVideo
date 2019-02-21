@@ -1,6 +1,8 @@
 package com.sdwl.video.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.sdwl.video.exception.BaseException;
+import com.sdwl.video.model.News;
 import com.sdwl.video.model.Video;
 import com.sdwl.video.service.IVideoService;
 import io.swagger.annotations.Api;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Creaed by fj on 2019/2/18
@@ -26,8 +29,46 @@ public class VideoController {
 
     @PostMapping(value = "uploadVideo")
     @ApiOperation(value="上传视频接口")
-    public void  uploadVideo(@RequestParam MultipartFile fileName, HttpServletRequest request, HttpServletResponse response,
+    public void  uploadVideo(@RequestParam MultipartFile fileName,
                              @RequestBody Video video) throws BaseException {
-        videoService.uploadVideo(fileName,request,response,video);
+        videoService.uploadVideo(fileName,video);
     }
+
+
+    /**
+     * 分页获取视频
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    @GetMapping(value="/getAllVideos")
+    @ApiOperation(value="(后台)分页获取视频")
+    public PageInfo<Video> getAllVideos(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, @RequestParam(value = "title",required = false)String title){
+        List<Video> videoList =  videoService.getAllVideos(pageNo,pageSize,title);
+        return new PageInfo<>(videoList);
+    }
+
+    /**
+     * 更新视频
+     * @param video
+     * @return
+     */
+    @PostMapping(value = "/updateVideo")
+    @ApiOperation(value="(更新一条视频")
+    public Integer updateVideo(@RequestParam MultipartFile fileName,@RequestBody Video video) throws BaseException {
+        return  videoService.updateVideo(fileName,video);
+    }
+
+    /**
+     * 删除视频
+     * @param id
+     * @return
+     */
+    @PostMapping(value = "/deleteVideo")
+    @ApiOperation(value="(删除一条视频")
+    public  Integer deleteVideo(@RequestParam("id") Integer id){
+        return videoService.deleteVideo(id);
+    }
+
+
 }

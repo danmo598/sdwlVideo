@@ -1,21 +1,25 @@
 package com.sdwl.video.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.sdwl.video.exception.BaseException;
 import com.sdwl.video.mapper.VideoMapper;
+import com.sdwl.video.model.News;
 import com.sdwl.video.model.Video;
 import com.sdwl.video.service.IVideoService;
 import com.sdwl.video.util.DateUtil;
-import com.sdwl.video.util.FFMpegUtil;
 import com.sdwl.video.util.enums.StatEnum;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Creaed by fj on 2019/2/18
@@ -33,8 +37,16 @@ public class VideoServiceImpl implements IVideoService {
     @Value("${image.filePath}")
     private String filePath;
 
+
     @Override
-    public void uploadVideo(MultipartFile fileUpload, HttpServletRequest request, HttpServletResponse response, Video video) throws BaseException {
+    public void uploadVideo(MultipartFile fileUpload,  Video video) throws BaseException {
+        String video_url = uploadVideos(fileUpload,video);
+        video.setVideoUrl(video_url);
+        videoMapper.insertSelective(video);
+    }
+
+
+    public String uploadVideos(MultipartFile fileUpload, Video video) throws BaseException {
         String date = DateUtil.formatDateTime("yyyyMMddhhmmss", new Date());
         String base_topath = filePath+"to/";
         String fileName = fileUpload.getOriginalFilename();
@@ -96,11 +108,38 @@ public class VideoServiceImpl implements IVideoService {
         System.out.println(fileName.split("\\.")[0] + "." + "mp4");
         File tofile = new File(base_topath+fileName.split("\\.")[0] + "." + "mp4");*/
         //tofile.delete();
-       // String video_url = "http://"+imageUrl+"/sdwlvideo/upload/to/"+fileName.split("\\.")[0] +date+"_commp.mp4";
-         String video_url = "http://"+imageUrl+"/sdwlvideo/upload/"+date+ fileName.split("\\.")[0] +".mp4";
+        // String video_url = "http://"+imageUrl+"/sdwlvideo/upload/to/"+fileName.split("\\.")[0] +date+"_commp.mp4";
+        String video_url = "http://"+imageUrl+"/sdwlvideo/upload/"+date+ fileName.split("\\.")[0] +".mp4";
         System.out.println(video_url);
-        video.setVideoUrl(video_url);
-        videoMapper.insertSelective(video);
+        return  video_url;
+    }
 
+
+    @Override
+    public List<Video> getAllVideos(Integer pageNo, Integer pageSize, String title) {
+        PageHelper.startPage(pageNo,pageSize,"date desc");
+        Example example = new Example(News.class);
+        if(StringUtils.isNotBlank(title)){
+            title = "title like '%" + title + "%' ";
+        }
+        if(StringUtils.isNotBlank(title)){
+            example.createCriteria().andCondition(title);
+        }
+        return videoMapper.selectByExample(example);
+    }
+
+    @Override
+    public Integer updateVideo(MultipartFile fileName,Video video) throws BaseException {
+        String video_url = uploadVideos(fileName,video);
+        video.setVideoUrl(video_url);
+        return videoMapper.updateByPrimaryKey(video);
+    }
+
+    @Override
+    public Integer deleteVideo(Integer id) {
+        Video video = videoMapper.selectByPrimaryKey(id);
+        File file = new File(video.getVideoUrl());
+        file.delete();
+        return videoMapper.deleteByPrimaryKey(id);
     }
 }
