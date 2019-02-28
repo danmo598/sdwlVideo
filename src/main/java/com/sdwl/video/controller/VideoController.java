@@ -69,7 +69,7 @@ public class VideoController {
      * @param id
      * @return
      */
-    @PostMapping(value = "/deleteVideo")
+    @GetMapping(value = "/deleteVideo")
     @ApiOperation(value="(删除一条视频")
     public  Integer deleteVideo(@RequestParam("id") Integer id){
         return videoService.deleteVideo(id);
