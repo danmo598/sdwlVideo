@@ -37,7 +37,7 @@ public class NewsServiceImpl implements INewsService {
 
     @Override
     public List<News> getAllNews(Integer pageNo, Integer pageSize,String title) {
-        PageHelper.startPage(pageNo,pageSize,"date desc");
+        PageHelper.startPage(pageNo,pageSize,"ispush desc ,date desc");
         Example example = new Example(News.class);
         if(StringUtils.isNotBlank(title)){
             title = "title like '%" + title + "%' ";

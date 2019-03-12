@@ -18,6 +18,6 @@
   </resultMap>
 
   <update id="updateById">
-    update news set count =count+1 where id =#{id}
+    update sd_news set count =count+1 where id =#{id}
   </update>
 </mapper>
